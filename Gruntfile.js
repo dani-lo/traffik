@@ -20,7 +20,7 @@ module.exports = function (grunt) {
                     cleancss: true
                 },
                 files: {
-                    "/app/css/app.css": "/app/css/app.less"
+                    "app/css/app.css": "app/css/app.less"
                 }
             }
         },
