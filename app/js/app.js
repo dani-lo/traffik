@@ -1,16 +1,18 @@
 'use strict';
 
-
-// Declare app level module which depends on filters, and services
-angular.module('myApp', [
+angular.module('traffik', [
   'ngRoute',
-  'myApp.filters',
-  'myApp.services',
-  'myApp.directives',
-  'myApp.controllers'
+  'ngResource',
+  'traffik.filters',
+  'traffik.services',
+  'traffik.directives',
+  'traffik.controllers'
 ]).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: 'RouteCtrl'});
-  $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: 'RouteCtrl'});
-  $routeProvider.otherwise({redirectTo: '/view1'});
+	//
+ 	$routeProvider.when('/user', {templateUrl: 'partials/screens/user.html', controller: 'UsersCtrl'});
+  	//
+  $routeProvider.when('/jams', {templateUrl: 'partials/screens/jams.html', controller: 'RouteCtrl'});
+  	//
+  $routeProvider.otherwise({redirectTo: '/user'});
 }]);

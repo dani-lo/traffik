@@ -91,6 +91,11 @@ StaticServlet.prototype.handleRequest = function(req, res) {
     return String.fromCharCode(parseInt(hex, 16));
   });
   var parts = path.split('/');
+
+  //if(path.indexOf("")){
+
+  //}
+
   if (parts[parts.length-1].charAt(0) === '.')
     return self.sendForbidden_(req, res, path);
   fs.stat(path, function(err, stat) {
@@ -181,7 +186,8 @@ StaticServlet.prototype.sendFile_ = function(req, res, path) {
     file.on('error', function(error) {
       self.sendError_(req, res, error);
     });
-  }
+  };
+  util.puts('200 OK....');
 };
 
 StaticServlet.prototype.sendDirectory_ = function(req, res, path) {
