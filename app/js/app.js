@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('traffik', [
+  'ui.bootstrap',
   'ngRoute',
   'ngResource',
   'traffik.filters',

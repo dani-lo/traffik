@@ -16,7 +16,19 @@ services.factory('UsersSrv', ['$resource', function($resource) {
 */
 services.factory('UsersSrv', ['$resource', function($resource) {
 
-	return $resource('http://localhost:8888/api/users/:userId', {}, {
+    return $resource(
+        'http://localhost:8888/api/users/:userId',
+        {userId: "@userId" },
+        {
+            "update": {method: "PUT"},
+            "userjams": {'method': 'GET', 'params': {'userjams_only': "true"}, isArray: true}
+        }
+    );
+}]);
+
+services.factory('JamsSrv', ['$resource', function($resource) {
+
+	return $resource('http://localhost:8888/api/jams/:townId', {}, {
         jsonpquery: { method: 'JSONP', params: {callback: 'JSON_CALLBACK'}, isArray: true }
     });
 }]);
