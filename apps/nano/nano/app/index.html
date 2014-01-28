@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" ng-app="traffik">
+<head>
+  <meta charset="utf-8">
+  <title>Traffic</title>
+  <link rel="stylesheet" href="css/ui.bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/app.css"/>
+</head>
+<body>
+  <div class="traffik">
+    <ul class="menu main tabbed" ng-controller="NavCtrl">
+      <li ng-class="{activetab: mylocation == '/user'}"><button ng-click="getscreen('user')">User</button></li>
+      <li ng-class="{activetab: mylocation == '/jams'}"><button ng-click="getscreen('jams')">Jams</button></li>
+    </ul>
+    <div class="screen-container" ng-view></div>
+  </div>
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-route.js"></script>
+  <script src="lib/angular/angular-resource.js"></script>
+  <script src="lib/jquery/jquery.1.9.1.min.js"></script>
+  <script src="lib/angular/ui-bootstrap-tpls-0.10.0.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+</body>
+</html>
