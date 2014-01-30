@@ -3,9 +3,15 @@
 /* Controllers */
 
 angular.module('traffik.controllers', [])
+  /******************************************************************************
+  //////////////////////////////////////////// RouteCtrl
+  ******************************************************************************/
   .controller('RouteCtrl', [function(){
 
   }])
+  /******************************************************************************
+  //////////////////////////////////////////// NavCtrl
+  ******************************************************************************/
   .controller('NavCtrl', ['$scope', '$location', function($scope, $location) {
     //
    	//$scope.mylocation = $location.path();
@@ -18,6 +24,9 @@ angular.module('traffik.controllers', [])
       return $location.path() == loc;
     };
   }])
+  /******************************************************************************
+  //////////////////////////////////////////// MapCtrl
+  ******************************************************************************/
   .controller('MapCtrl', ['$scope', '$rootScope', function($scope, $rootScope){
 
     $scope.map = {
@@ -49,8 +58,6 @@ angular.module('traffik.controllers', [])
             ]
     };
 
-    $scope.markers = [];
-
     var unbind = $rootScope.$on("geoLocate", refreshMap);
 
     $scope.$on('$destroy', unbind);
@@ -59,14 +66,31 @@ angular.module('traffik.controllers', [])
       //alert("center changed ....")
     });
 
+    $scope.removeMarkers = function () {
+      //  
+      alert("NOW")
+      $scope.map.markers.length = 0;
+    };
+
     function refreshMap(event, position) {
       //
+      /*
       $scope.map.center = {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude
-      };  
+      }; 
+      */
+      $scope.map.markers.push({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        showWindow: true,
+        title: 'Marker 2'
+      }) 
     };
   }])
+  /******************************************************************************
+  //////////////////////////////////////////// JamsCtrl
+  ******************************************************************************/
   .controller('JamsCtrl', ['GeolocationSrv', '$scope', '$rootScope', function(GeolocationSrv,  $scope, $rootScope){
 
     $scope.oneAtATime = true;
@@ -99,6 +123,9 @@ angular.module('traffik.controllers', [])
     };
 
   }])
+  /******************************************************************************
+  //////////////////////////////////////////// UsersCtrl
+  ******************************************************************************/
   .controller('UsersCtrl', ['$scope', 'UsersSrv', function($scope, UsersSrv){
     
     $scope.user = {
