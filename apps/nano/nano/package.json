@@ -1,0 +1,21 @@
+{
+  "name": "traffik",
+  "description": "A traffic news sharing app",
+  "repository": "https://github.com/dani-lo/traffik",
+  "devDependencies": {
+    "phantomjs" : "~1.9",
+    "karma" : "~0.10",
+    "karma-junit-reporter" : "~0.1",
+    "karma-jasmine" : "~0.1",
+    "karma-ng-scenario" : "~0.1",
+    "grunt": "~0.4.1",
+    "matchdep": "*",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-jshint": "~0.7.1",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-csslint": "~0.1.2",
+    "grunt-autoprefixer": "~0.4.0",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-notify": "~0.2.15"
+  }
+}
