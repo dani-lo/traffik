@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('traffik', [
+  'google-maps',
   'ui.bootstrap',
   'ngRoute',
   'ngResource',

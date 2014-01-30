@@ -29,9 +29,20 @@ ul.menu {
 				background-image: linear-gradient(to bottom, #ee5f5b, #bd362f);
 				background-repeat: repeat-x;
 				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffee5f5b',endColorstr='#ffbd362f', GradientType=0);
-				border: 1px solid #000;
+				border: 0px solid #000;
 			}
 
+			&.activetab {
+
+				button {
+					background-color: #bbb;
+					background-image: -moz-linear-gradient(top, #BBB, #999);
+					background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#BBB), to(#999));
+					background-image: -webkit-linear-gradient(top, #bbb, #999);
+					background-image: -o-linear-gradient(top, #bbb, #999);
+					background-image: linear-gradient(to bottom, #bbb, #999);
+				}
+			}
 		}
 	}
 	
