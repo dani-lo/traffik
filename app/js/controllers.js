@@ -27,6 +27,18 @@ angular.module('traffik.controllers', [])
   /******************************************************************************
   //////////////////////////////////////////// MapCtrl
   ******************************************************************************/
+  .controller('MapCtrl', ['$scope', function ($scope) {
+    $scope.mapOptions = {
+        center: new google.maps.LatLng(35.784, -78.670),
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    $scope.showMapVar = true;
+  }])
+  /******************************************************************************
+  //////////////////////////////////////////// MapCtrl
+  ******************************************************************************/
+  /*
   .controller('MapCtrl', ['$scope', '$rootScope', function($scope, $rootScope){
 
     $scope.map = {
@@ -62,57 +74,34 @@ angular.module('traffik.controllers', [])
 
     $scope.$on('$destroy', unbind);
 
-    $scope.$watch($scope.map, function() {
+    $scope.$watch($scope.map.markers, function() {
       //alert("center changed ....")
+      alert("change to map")
     });
 
     $scope.removeMarkers = function () {
       //  
-      alert("NOW")
+      //alert("NOW")
       $scope.map.markers.length = 0;
     };
 
     function refreshMap(event, position) {
       //
-      /*
-      $scope.map.center = {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude
-      }; 
-      */
       $scope.map.markers.push({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
         showWindow: true,
         title: 'Marker 2'
-      }) 
+      });
+
+      $scope.maprefresh = true;
     };
   }])
+*/
   /******************************************************************************
   //////////////////////////////////////////// JamsCtrl
   ******************************************************************************/
   .controller('JamsCtrl', ['GeolocationSrv', '$scope', '$rootScope', function(GeolocationSrv,  $scope, $rootScope){
-
-    $scope.oneAtATime = true;
-
-    $scope.groups = [
-      {
-        title: "Dynamic Group Header - 1",
-        content: "Dynamic Group Body - 1"
-      },
-      {
-        title: "Dynamic Group Header - 2",
-        content: "Dynamic Group Body - 2"
-      }
-    ];
-
-    $scope.items = ['Item 1', 'Item 2', 'Item 3'];
-
-    $scope.addItem = function() {
-      //
-      var newItemNo = $scope.items.length + 1;
-      $scope.items.push('Item ' + newItemNo);
-    };
 
     $scope.getGeolocation = function() {
       //
@@ -143,8 +132,42 @@ angular.module('traffik.controllers', [])
         //
       });
     };
-}]);
+  }])
+  /******************************************************************************
+  //////////////////////////////////////////// ModalJamsCtrl
+  ******************************************************************************/
+  .controller('ModalJamsCtrl', ['$scope', '$modal', '$log', function($scope, $modal, $log){
+    
+    $scope.jam = {
+        description: ''
+    };
 
-function AccordionDemoCtrl($scope) {
-  
-}
+    $scope.open = function () {
+
+        $scope.jam = {
+          description: ''
+        };
+
+        $modal.open({
+            templateUrl: 'myModalContent.html',
+            backdrop: true,
+            windowClass: 'modal',
+            controller: function ($scope, $modalInstance, $log, jam) {
+                $scope.jam = jam;
+                $scope.submit = function () {
+                    $log.log('Submiting jam info.');
+                    $log.log(jam);
+                    $modalInstance.dismiss('cancel');
+                }
+                $scope.cancel = function () {
+                    $modalInstance.dismiss('cancel');
+                };
+            },
+            resolve: {
+                jam: function () {
+                    return $scope.jam;
+                }
+            }
+        });
+    };
+  }]);

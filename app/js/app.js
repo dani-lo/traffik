@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('traffik', [
-  'google-maps',
+  'ui.map',
   'ui.bootstrap',
   'ngRoute',
   'ngResource',
@@ -18,3 +18,7 @@ config(['$routeProvider', function($routeProvider) {
   	//
   $routeProvider.otherwise({redirectTo: '/user'});
 }]);
+
+function onGoogleReady() {
+  angular.bootstrap(document.getElementById("map"), ['app.ui-map']);
+}

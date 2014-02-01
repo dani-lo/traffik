@@ -1,18 +1,42 @@
-<div id="map-container" ng-controller="MapCtrl"> 
-  <google-map center='map.center' zoom='map.zoom'>
-    <marker ng-repeat="m in map.markers" coords="m" icon="m.icon" click="onMarkerClicked(m)">
-            <marker-label content="m.title" anchor="22 0" class="marker-labels"/>
-            <window show="m.showWindow" closeClick="m.closeClick()">
-                <p>This is an info window at {{ m.latitude | number:4 }}, {{ m.longitude | number:4 }}!</p>
+<!-- MAP -->
 
-                <p class="muted">My marker will stay open when the window is popped up!</p>
-            </window>
-        </marker>
-  </google-map>
-  <button ng-click="removeMarkers()">remove markers ...</button>
+<div ng-controller="MapCtrl">
+   <button ng-click="showMap()">Show map</button>
+   <div ng-show="showMapVar">
+      <div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]"
+       ui-event="{}">
+      </div>
+      <div id="map" ui-map="myMap" style="height:200px;width:300px" 
+       ui-event="{}" ui-options="mapOptions">
+      </div>
+   </div>
+
+<div ng-controller="ModalJamsCtrl" class="map-overlay add-jam">
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3>Add Jam</h3>
+        </div>
+        <form ng-submit="submit()">
+          <div class="modal-body">
+            <label>Add a description</label>
+            <textarea rows="4" cols="50"  type="text" ng-model="jam.description"></textarea>
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+              <input type="submit" class="btn primary-btn" value="Submit" />
+          </div>
+        </form>
+    </script>
+
+    <button class="btn btn-default btn-add-jam" ng-click="open()">Open me!</button>
+    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
 </div>
+
 <div ng-controller="JamsCtrl">
-  <button ng-click="getGeolocation()">get ur geolocation ...</button>
+  <div class="jams-controls">
+    <button class="button-add" ng-click="getGeolocation()">add jam ...</button>
+  </div>
+  <!--
   <label class="checkbox" style="display:none">
     <input type="checkbox" ng-model="oneAtATime">
     Open only one at a time
@@ -37,4 +61,5 @@
         This is just some content to illustrate fancy headings.
     </accordion-group>
   </accordion>
+-->
 </div>
