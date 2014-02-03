@@ -9,6 +9,8 @@
       <div id="map" ui-map="myMap" style="height:200px;width:300px" 
        ui-event="{}" ui-options="mapOptions">
       </div>
+      <div ng-repeat="marker in markers" ui-map-marker="marker" ui-event="{'map-click': 'markerClicked(marker)'}"></div>
+      <button class="button-add" ng-click="addMarker()">add marker ...</button>
    </div>
 
 <div ng-controller="ModalJamsCtrl" class="map-overlay add-jam">

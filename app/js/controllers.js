@@ -28,12 +28,31 @@ angular.module('traffik.controllers', [])
   //////////////////////////////////////////// MapCtrl
   ******************************************************************************/
   .controller('MapCtrl', ['$scope', function ($scope) {
+    //
     $scope.mapOptions = {
-        center: new google.maps.LatLng(35.784, -78.670),
+        center: new google.maps.LatLng(-8.65629, 115.22209),
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
+
     $scope.showMapVar = true;
+
+    $scope.markers = [];
+
+    $scope.addMarker = function() {
+      //
+      var newMarker = new google.maps.Marker({
+            map: $scope.myMap,
+            position: new google.maps.LatLng(-8.65629, 115.22209),
+      });
+
+      $scope.markers.push(newMarker);
+    };
+
+    $scope.markerClicked = function (m) {
+        window.alert("clicked");
+        console.log(m);
+    };
   }])
   /******************************************************************************
   //////////////////////////////////////////// MapCtrl
