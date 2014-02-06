@@ -5,9 +5,7 @@
       <div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]"
        ui-event="{}">
       </div>
-      <div id="map" ui-map="myMap" style="height:200px;width:300px" 
-       ui-event="{}" ui-options="mapOptions">
-      </div>
+      <div id="map" ui-map="myMap" ui-event="{}" ui-options="mapOptions"></div>
       <div ng-repeat="marker in markers" ui-map-marker="marker" ui-event="{'map-click': 'markerClicked(marker)'}"></div>
    </div>
 
