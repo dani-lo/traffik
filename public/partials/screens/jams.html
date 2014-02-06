@@ -1,0 +1,65 @@
+<!-- MAP -->
+
+<div ng-controller="MapCtrl">
+   <div ng-show="showMapVar">
+      <div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]"
+       ui-event="{}">
+      </div>
+      <div id="map" ui-map="myMap" style="height:200px;width:300px" 
+       ui-event="{}" ui-options="mapOptions">
+      </div>
+      <div ng-repeat="marker in markers" ui-map-marker="marker" ui-event="{'map-click': 'markerClicked(marker)'}"></div>
+   </div>
+
+<div ng-controller="ModalJamsCtrl" class="map-overlay add-jam">
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3>Add Jam</h3>
+            <p>You can optiona;lly enter a description for the jam you are adding. Your current location will be automatically used for the jam you are adding.</p>
+        </div>
+        <form ng-submit="submit()">
+          <div class="modal-body">
+            <label>Add a description</label>
+            <textarea rows="4" cols="50"  type="text" ng-model="jam.description"></textarea>
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+              <input type="submit" class="btn primary-btn" value="Submit" />
+          </div>
+          <button class="btn btn-warning" ng-click="createJam()">test create jam</button>
+        </form>
+    </script>
+
+    <button class="btn btn-default btn-add-jam" ng-click="open()">Add Jam...</button>
+</div>
+
+<div ng-controller="JamsCtrl">
+  <div class="jams-controls">
+  </div>
+  <!--
+  <label class="checkbox" style="display:none">
+    <input type="checkbox" ng-model="oneAtATime">
+    Open only one at a time
+  </label>
+
+  <accordion close-others="oneAtATime">
+    <accordion-group heading="Static Header, initially expanded" is-open="true">
+      This content is straight in the template.
+    </accordion-group>
+    <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
+      {{group.content}}
+    </accordion-group>
+    <accordion-group heading="Dynamic Body Content">
+      <p>The body of the accordion group grows to fit the contents</p>
+        <button class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
+        <div ng-repeat="item in items">{{item}}</div>
+    </accordion-group>
+    <accordion-group is-open="isopen">
+        <accordion-heading>
+            I can have markup, too! <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+        </accordion-heading>
+        This is just some content to illustrate fancy headings.
+    </accordion-group>
+  </accordion>
+-->
+</div>

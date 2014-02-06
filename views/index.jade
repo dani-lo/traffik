@@ -1,0 +1,31 @@
+extends layout
+
+block body
+
+  div(class='traffik')
+
+    ul(class='menu main tabbed', ng-controller='NavCtrl')
+
+      li(ng-class="{activetab: chekLocation('/user')}")
+        button(ng-click="getscreen('user')") User
+
+      li(ng-class="{activetab: chekLocation('/jams')}")
+        button(ng-click="getscreen('jams')") Jams
+
+    div(class='screen-container', ng-view)
+
+  script(src='js/lib/angular/angular.js')
+  script(src='js/lib/angular/angular-route.js')
+  script(src='js/lib/angular/angular-resource.js')
+  script(src='js/lib/bower_components/angular-ui-utils/ui-utils.js')
+  script(src='js/lib/bower_components/angular-ui-map/ui-map.js')
+  script(src='js/lib/jquery/jquery.1.9.1.min.js')
+  script(src='js/lib/angular/ui-bootstrap-tpls-0.10.0.js')
+  script(src='//maps.googleapis.com/maps/api/js?sensor=false')
+  script(src='js/lib/bower_components/underscore/underscore-min.js')       
+  script(src='js/lib/bower_components/angular-google-maps/dist/angular-google-maps.min.js')
+  script(src='js/app.js')
+  script(src='js/services.js')
+  script(src='js/controllers.js')
+  script(src='js/filters.js')
+  script(src='js/directives.js')
