@@ -32,7 +32,7 @@ services.factory('JamsSrv', ['$resource', function($resource) {
 	return $resource('/api/jams/:action', {}, {
         'query' : { 
             method: 'GET', 
-            params: {action : 'read', callback: 'JSON_CALLBACK', jam : null}, 
+            params: {action : 'read'}, 
             isArray: true 
         },
         'save' : {

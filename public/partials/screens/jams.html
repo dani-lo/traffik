@@ -18,7 +18,7 @@
         <form ng-submit="submit()">
           <div class="modal-body">
             <label>Add a description</label>
-            <textarea rows="4" cols="50"  type="text" ng-model="jam.description"></textarea>
+            <textarea rows="4" cols="50"  type="text" ng-model="input.description"></textarea>
           </div>
           <div class="modal-footer">
               <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
@@ -28,7 +28,7 @@
         </form>
     </script>
 
-    <button class="btn btn-default btn-add-jam" ng-click="open()">Add Jam...</button>
+    <button class="btn btn-default btn-add-jam" ng-click="open()">Add Traffic Jam</button>
 </div>
 
 <div ng-controller="JamsCtrl">

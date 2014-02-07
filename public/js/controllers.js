@@ -27,7 +27,7 @@ angular.module('traffik.controllers', [])
   /******************************************************************************
   //////////////////////////////////////////// MapCtrl
   ******************************************************************************/
-  .controller('MapCtrl', ['$scope', function ($scope) {
+  .controller('MapCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
     //
     $scope.mapOptions = {
         center: new google.maps.LatLng(-8.65629, 115.22209),
@@ -39,20 +39,44 @@ angular.module('traffik.controllers', [])
 
     $scope.markers = [];
 
-    $scope.addMarker = function() {
+    $scope.addMarker = function(lat, lng) {
       //
       var newMarker = new google.maps.Marker({
             map: $scope.myMap,
-            position: new google.maps.LatLng(-8.65629, 115.22209),
+            //position: new google.maps.LatLng(-8.65629, 115.22209),
+            position: new google.maps.LatLng(lat, lng)
       });
 
       $scope.markers.push(newMarker);
     };
 
     $scope.markerClicked = function (m) {
-        window.alert("clicked");
-        console.log(m);
+        //window.alert("clicked");
+        //console.log(m);
     };
+
+    var unbind = $rootScope.$on("geoLocated", refreshMap);
+
+    $scope.$on('$destroy', unbind);
+
+    function refreshMap(event, location) {
+      //
+      /*
+      $scope.markers.push({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        showWindow: true,
+        title: 'Marker 2'
+      });
+      */
+      var newMarker = new google.maps.Marker({
+            map: $scope.myMap,
+            position: new google.maps.LatLng(location.coords.latitude, location.coords.longitude)
+      });
+
+      $scope.markers.push(newMarker);
+    };
+
   }])
   /******************************************************************************
   //////////////////////////////////////////// MapCtrl
@@ -155,54 +179,58 @@ angular.module('traffik.controllers', [])
   /******************************************************************************
   //////////////////////////////////////////// ModalJamsCtrl
   ******************************************************************************/
-  .controller('ModalJamsCtrl', ['$scope', '$modal', '$log', 'JamsSrv', function($scope, $modal, $log, JamsSrv){
-    
-    $scope.jam = {
-        description: ''
-    };
+  .controller('ModalJamsCtrl', ['$scope', '$rootScope', '$modal', '$log', 'JamsSrv', 'GeolocationSrv',  function($scope, $rootScope, $modal, $log, JamsSrv, GeolocationSrv){
 
     $scope.open = function () {
         
-      $scope.jam = {
-        description: ''
-      };
-
       $modal.open({
+
         templateUrl: 'myModalContent.html',
         backdrop: true,
         windowClass: 'modal',
-        controller: function ($scope, $modalInstance, $log, jam) {
-            $scope.jam = jam;
+
+        controller: function ($scope, $modalInstance, $log) {
+            
+            $scope.input = {};
+
             $scope.submit = function () {
-                $log.log('Submiting jam info.');
-                $log.log(jam);
+              
+                var jam, location, user, date, jamsService;
+
+                location = "ubud";
+                user = null;
+                date = new Date();
+
+                jam = {
+                  "date" : date,
+                  "location" : location,
+                  "user" : user,
+                  "description" : $scope.input.description,
+                  "latlng" : null
+                };
+
+                jamsService = new JamsSrv();
+
+                GeolocationSrv.getGeolocation(function(location){
+
+                  jam.latlng = "" + location.coords.latitude + "," + location.coords.longitude;
+                  
+                  jamsService.jam = jam;
+                
+                  jamsService.$save();
+
+                  $rootScope.$emit("geoLocated", location);
+                });
+                
                 $modalInstance.dismiss('cancel');
-            }
+            };
+
             $scope.cancel = function () {
                 $modalInstance.dismiss('cancel');
             };
-            $scope.createJam = function() {
-
-              var jam = {
-                "date" : "24-01-2014",
-                "location" : "ubud",
-                "user" : "2",
-                "description" : "Stuck here am desperate",
-                "latlng" : "-8.515581,115.260057"
-              };
-              
-              var jamsService = new JamsSrv();
-              jamsService.jam = jam;
-              jamsService.$save();
-              //JamsSrv.data = {"ppppp" : "oooooo"};
-              //JamsSrv.save({}, data);
-              //JamsSrv.save({"location" : "ubud", "jam" : encodeURIComponent(JSON.stringify(jam))});
-            };
           },
           resolve: {
-              jam: function () {
-                  return $scope.jam;
-              }
+            //
           }
       });
     };
